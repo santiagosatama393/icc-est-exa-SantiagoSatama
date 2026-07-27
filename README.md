@@ -7,6 +7,6 @@ decidi utilisar un set y un treeSet para no tener los duplicados y poder tenerlo
 
 
 # metodo b
-decici utilisar un set y un treeMap para la informacion de ordenaiento y las funciones descendente y ascendente con la funcion del treeSet Y para agregar el return resiltado 
+decici utilisar un set y un treeMap para la informacion de ordenaiento y las funciones descendente y ascendente con la funcion del treeSet Y para agregar el return resultado y el orden se cumple con todas la condiciones que se ah dicho en las intrucciones par el codigo, la categoria, y la prioridaad 
 
 
