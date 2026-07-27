@@ -1,18 +1,12 @@
-## Getting Started
+## Examen
+# SANTIAGO SATAMA 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# metodo a
+decidi utilisar un set y un treeSet para no tener los duplicados y poder tenerlos ordenados de manera descendente donde utilize c1 y c2 para poder compararlos de manera ascedente y utilieze un double por que son horas 
 
-## Folder Structure
 
-The workspace contains two folders by default, where:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+# metodo b
+decici utilisar un set y un treeMap para la informacion de ordenaiento y las funciones descendente y ascendente con la funcion del treeSet Y para agregar el return resiltado 
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
