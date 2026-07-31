@@ -23,6 +23,8 @@ public class App {
     for(SoftwareProject softwareProject:ordered){
         System.out.println(softwareProject.getProjectCode()+ "horas trabajadas"+ softwareProject.getMetrics().getWorload());
     }
+
+    System.out.println("metodo b " + critical.size());
         
 
 

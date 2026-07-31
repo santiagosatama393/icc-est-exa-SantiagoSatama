@@ -1,86 +1,87 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import models.SoftwareProject;
 
 public class ProjectController {
-  public Set<SoftwareProject> filterAndOrderProjects(
-          List<SoftwareProject> projects,
-          double minimumWorkload
-  ){
-    Set<SoftwareProject> result = new TreeSet<>(new Comparator<SoftwareProject>){
-      @Override
-      public int compare(SoftwareProject c1, SoftwareProject c2){
-        int workloadCompare = Double.compare(
-          c2.getMetrics().getWorload(),
-          c1.getMetrics().getWorload()
-        );
-        if(workloadCompare != 0){
-          return workloadCompare;
+  public Set<SoftwareProject> filterAndOrderProjects(List<SoftwareProject> projects,double minimumWorkload){
+    Set<SoftwareProject> resultado = new TreeSet<>(
+      (c1,c2)->{
+        int compW = Double.compare(c2.getMetrics().getWorload(),c1.getMetrics().getWorload());
+        if(compW !=0){
+          return compW;
         }
-        return c1.getCode().compareToIngnoreCase(c2.getCode());
+        int compCo = c1.getProjectCode().compareToIgnoreCase(c2.getProjectCode());
+        return compCo;
+      }
+    );
+    for (SoftwareProject project:projects ){
+      if(project.getMetrics().getWorload()>= minimumWorkload){
+        resultado.add(project);
+
       }
 
-  };
-
-  for (SoftwareProject project:projects ){
-    if(project.getMetrics().getWorload()>= minimumWorkload){
-      result.add(project);
-
     }
-
-  }
-  return result;
-
-  }
+    return resultado;
+}
 
   
- public List<SoftwareProject> classifyAndExtractProjects(
-         List<SoftwareProject> projects,
-         String requestedCategory
- ){
-  Map<String,set<SoftwareProject>> categorias = new TreeMap<>();
-  categorias.put("CRITICAL", new TreeSet<>((c1,c2))_->{
-    int compP = interger.compare(c2.getPriority(), c1.getPriority());
-    if(compP !=0){
-      return compP;
+public List<SoftwareProject> classifyAndExtractProjects(List<SoftwareProject> projects, String requestedCategory){
+   Map<String,Set<SoftwareProject>> categorias = new TreeMap<>();
+  categorias.put("CRITICAL", new TreeSet<>(
+    (c1,c2)->{
+      int compP = Integer.compare(c2.getPriority(),c1.getPriority());
+      if(compP !=0){
+        return compP;
+      }
+      int comPc = c1.getProjectCode().compareToIgnoreCase(c2.getProjectCode());
+      return comPc;
     }
-    int compP = C1.getProjectCode(),compareToIngnoreCase(C2.getProjectCode());
-    return compC;
-  }));
+  ));
 
-  categorias.put("SMALL", new TreeSet<>((c1, c2)))->{
-    int compP = interger.compare(c2.getPriority(), c1.getPriority());
-    if(compP !=0){
-      return compP;
+  categorias.put("SMALL", new TreeSet<>(
+    (c1,c2)->{
+      int compP = Integer.compare(c2.getPriority(),c1.getPriority());
+      if(compP !=0){
+        return compP;
+      }
+      int comPc = c1.getProjectCode().compareToIgnoreCase(c2.getProjectCode());
+      return comPc;
     }
-    int compP = C1.getProjectCode(),compareToIngnoreCase(C2.getProjectCode());
-    return compC;
-
-  }));
-  categorias.put("STANDAR", new TreeSet<>((c1, c2)))->{
-    int compP = interger.compare(c2.getPriority(), c1.getPriority());
-    if(compP !=0){
-      return compP;
+  ));
+  categorias.put("STANDARD", new TreeSet<>(
+    (c1,c2)->{
+      int compP = Integer.compare(c2.getPriority(),c1.getPriority());
+      if(compP !=0){
+        return compP;
+      }
+      int comPc = c1.getProjectCode().compareToIgnoreCase(c2.getProjectCode());
+      return comPc;
     }
-    int compP = C1.getProjectCode(),compareToIngnoreCase(C2.getProjectCode());
-    return compC;
-
-
- }));
- }));
-  categorias.put("STANDAR", new TreeSet<>((c1, c2)))->{
-    int compP = interger.compare(c2.getPriority(), c1.getPriority());
-    if(compP !=0){
-      return compP;
+  ));
+  for(SoftwareProject sp : projects){
+    String rango;
+    if(sp.getMetrics().getWorload()>=900 || sp.getMetrics().getPendingTasks()>=18){
+      rango = "CRITICAL";
+    }else if (sp.getMetrics().getWorload()>=350){
+      rango = "STANDARD";
+    }else{
+      rango = "SMALL";
     }
-    int compP = C1.getProjectCode(),compareToIngnoreCase(C2.getProjectCode());
-    return compC;
+    Set<SoftwareProject> rs = categorias.get(rango);
+    rs.add(sp);
 
-
+  }
+  String rCategory = requestedCategory == null? "" : requestedCategory.trim().toUpperCase();
+  if(!categorias.containsKey(rCategory)){
+    return new ArrayList<>();
+  }
+  return new ArrayList<>(categorias.get(rCategory));
 }
 }
-
